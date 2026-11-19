@@ -1,0 +1,22 @@
+{% extends "base.html" %}{% block body %}
+<h1>Results</h1>
+{% if not r %}<div class="card">No results yet. Run <code>python cli.py evaluate</code>.</div>{% else %}
+{% set st = r.judgment_status %}
+<p class="muted">Generated {{ r.generated }} · a* = {{ r.alpha_star }} ({{ r.alpha_source }}) · {{ r.queries_used|length }} final queries used{% if r.queries_without_relevant %} · excluded (no relevant document): {{ r.queries_without_relevant|join(', ') }}{% endif %}</p>
+{% if st.source %}<p class="note">Scores from {{ st.source }}.</p>{% endif %}
+{% if st.unresolved or st.incomplete %}<p class="note">Judging is incomplete ({{ st.incomplete }} pairs not judged by both, {{ st.unresolved }} unresolved). These are pilot numbers only.</p>{% endif %}
+<div class="card"><h2 style="margin-top:0">Retrieval effectiveness (mean over queries)</h2><table>
+<tr><th>Configuration</th><th class="num">nDCG@10</th><th class="num">P@5</th><th class="num">Recall (judged pool)</th></tr>
+{% for c in configs %}{% set m = r.summary[c] %}<tr><td>{{ c }}</td>
+{% for k in ['nDCG@10','P@5','Recall (pool)'] %}<td class="num">{{ '%.4f'|format(m[k]) if m[k] is not none else '–' }}</td>{% endfor %}</tr>{% endfor %}</table></div>
+<div class="card"><h2 style="margin-top:0">Paired randomization tests (Holm-adjusted within each measure)</h2><table>
+<tr><th>Measure</th><th>Comparison</th><th class="num">Mean difference</th><th class="num">p (Holm)</th><th>α = .05</th></tr>
+{% for t in r.tests if t.n_queries > 0 %}<tr><td>{{ t.measure }}</td><td>{{ t.config_1 }} vs {{ t.config_2 }}</td><td class="num">{{ '%+.4f'|format(t.mean_difference) }}</td><td class="num">{{ '%.4f'|format(t.p_holm) }}</td><td>{{ 'significant' if t.significant else '' }}</td></tr>{% else %}<tr><td colspan="5">No query has a relevant document yet.</td></tr>{% endfor %}</table></div>
+<div class="grid g2"><div class="card"><h2 style="margin-top:0">Inter-annotator agreement</h2><table>
+<tr><th>Pool</th><th class="num">Pairs</th><th class="num">Weighted κ</th><th class="num">% agreement</th></tr>
+{% for ph, a in r.agreement.items() %}<tr><td>{{ ph }}</td><td class="num">{{ a.pairs }}</td><td class="num">{{ '%.3f'|format(a.kappa) if a.kappa is not none else '–' }}</td><td class="num">{{ '%.1f'|format(100*a.percent_agreement) if a.percent_agreement is not none else '–' }}</td></tr>{% endfor %}</table></div>
+<div class="card"><h2 style="margin-top:0">Query-level analysis (exploratory)</h2><table>
+{% for k, v in r.correlations.items() %}<tr><td>Spearman {{ k }}</td>{% if v.rho == v.rho %}<td class="num">ρ = {{ '%+.3f'|format(v.rho) }}</td><td class="num">p = {{ '%.3f'|format(v.p) }}</td>{% else %}<td colspan="2">undefined</td>{% endif %}</tr>{% endfor %}
+<tr><td>Adaptive vs fixed (queries)</td><td colspan="2">higher {{ r.adaptive_vs_fixed.higher }} · lower {{ r.adaptive_vs_fixed.lower }} · equal {{ r.adaptive_vs_fixed.equal }}</td></tr></table></div></div>
+{% if has_plot %}<div class="card"><img src="{{ url_for('plot') }}" alt="Query-level scatter plots" style="max-width:100%"></div>{% endif %}
+{% endif %}{% endblock %}

@@ -1,0 +1,6 @@
+bm25s>=0.2
+sentence-transformers>=3.0
+flask>=3.0
+numpy
+scipy
+matplotlib

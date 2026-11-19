@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block body %}
+<h1>Experimental platform</h1>
+<p class="muted">Undergraduate research abstracts · {{ n_docs }} documents · embeddings: {{ meta.model }}</p>
+{% if 'TEST' in meta.model %}<p class="note">These embeddings come from a test stand-in, not Sentence-BERT. Run <code>python cli.py prepare</code> on a machine with internet access.</p>{% endif %}
+<div class="grid g2">
+<div class="card"><h2 style="margin-top:0">Pipeline</h2><table>
+<tr><td>1. Prepare corpus</td><td>{% if s.prepared %}<span class="pill">done</span> {{ s.prepared.included }} abstracts, {{ s.prepared.truncated|length }} truncated{% else %}not yet{% endif %}</td></tr>
+<tr><td>2. Development runs</td><td>{% if s.dev %}<span class="pill">done</span> {{ s.dev.queries|length }} queries, {{ s.dev.pool_pairs }} pairs{% else %}not yet{% endif %}</td></tr>
+<tr><td>3. Fixed weight a*</td><td>{% if s.get('alpha_star') is not none %}<b>{{ s.alpha_star }}</b> <span class="muted">({{ s.alpha_source }})</span>{% else %}not yet{% endif %}</td></tr>
+<tr><td>4. Frozen + final runs</td><td>{% if s.final %}<span class="pill">done</span> {{ s.final.queries|length }} queries, {{ s.final.pool_pairs }} pairs{% else %}not yet{% endif %}</td></tr>
+</table></div>
+<div class="card"><h2 style="margin-top:0">Relevance judging</h2><table>
+<tr><th>Pool</th><th class="num">Pairs</th>{% for a in annotators %}<th class="num">{{ a }}</th>{% endfor %}<th>Consensus</th></tr>
+{% for ph, p in progress.items() %}<tr><td>{{ ph }}</td><td class="num">{{ p.pairs }}</td>
+{% for a in annotators %}<td class="num"><a href="{{ url_for('annotate', phase=ph, who=a) }}">{{ p.annotators[a] }}</a></td>{% endfor %}
+<td>{% if p.consensus %}{{ p.consensus.agreed + p.consensus.resolved }} final · {{ p.consensus.unresolved }} to resolve{% else %}–{% endif %}</td></tr>{% endfor %}
+</table></div></div>
+{% endblock %}

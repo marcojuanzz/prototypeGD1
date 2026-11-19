@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block body %}
+<p class="muted">{{ who }} · {{ phase }} pool · pair {{ position }} of {{ total }} · {{ n_done }} judged
+{% if prev %} · <a href="{{ url_for('annotate', phase=phase, who=who, redo=prev[0] ~ '|' ~ prev[1]) }}">← change previous</a>{% endif %}</p>
+<div class="grid g2">
+<div class="card"><span class="pill">Query</span><h2>{{ q.title }}</h2><p class="abstract">{{ q.abstract }}</p></div>
+<div class="card"><span class="pill">Candidate</span><h2>{{ d.title }}</h2><p class="abstract">{{ d.abstract }}</p></div>
+</div>
+<div class="card"><b>How related is the candidate study to the query study?</b> Judge the research problem, objectives and focus, not shared keywords.
+<div class="scores">
+{% for s, why in [(2,'Same or very closely related problem, topic or objective; a closely related prior study.'),(1,'Shares a substantive subject or research area but differs in problem, objective, population, context or focus.'),(0,'Not a meaningfully related problem or topic; only isolated keywords, a broad field or incidental terms.')] %}
+<form method="post"><input type="hidden" name="who" value="{{ who }}"><input type="hidden" name="qid" value="{{ pair[0] }}"><input type="hidden" name="did" value="{{ pair[1] }}"><input type="hidden" name="score" value="{{ s }}">
+<button class="{{ 'sel' if current == s else '' }}"><b>{{ s }} – {{ labels[s] }}</b><small>{{ why }}</small></button></form>
+{% endfor %}</div></div>
+<p class="muted">Keyboard: press 2, 1 or 0.</p>
+<script>document.addEventListener('keydown',e=>{const f={'2':0,'1':1,'0':2}[e.key];if(f!==undefined)document.querySelectorAll('.scores form')[f].submit();});</script>
+{% endblock %}

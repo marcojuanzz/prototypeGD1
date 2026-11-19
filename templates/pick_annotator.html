@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block body %}<div class="card"><h1>Judge the {{ phase }} pool</h1>
+<p>Choose who is judging. Each annotator works alone and sees the pairs in a separate random order, without the configuration or rank.</p>
+{% for a in annotators %}<a class="btn" href="{{ url_for('annotate', phase=phase, who=a) }}">{{ a }}</a> {% endfor %}</div>{% endblock %}

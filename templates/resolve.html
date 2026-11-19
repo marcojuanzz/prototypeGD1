@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block body %}
+<h1>Disagreements – {{ phase }} pool</h1>
+<p class="muted">{{ items|length }} disagreements · {{ open_items|length }} still to resolve. Review both abstracts together, apply the criteria, and record the agreed score. Original independent scores stay unchanged for the kappa.
+· <a href="{{ url_for('resolve', phase='dev' if phase=='final' else 'final') }}">switch to {{ 'dev' if phase=='final' else 'final' }} pool</a></p>
+{% for (pair, a, b, r) in items %}
+<div class="card"><p><b>{{ pair[0] }} ↔ {{ pair[1] }}</b> · {{ annotators[0] }}: <b>{{ a }}</b> · {{ annotators[1] }}: <b>{{ b }}</b>
+{% if r is not none %} · <span class="pill">resolved: {{ r }}</span>{% endif %}</p>
+<div class="grid g2"><details><summary>{{ by_id[pair[0]].title }}</summary><p class="abstract">{{ by_id[pair[0]].abstract }}</p></details>
+<details><summary>{{ by_id[pair[1]].title }}</summary><p class="abstract">{{ by_id[pair[1]].abstract }}</p></details></div>
+<form method="post" style="margin-top:8px"><input type="hidden" name="qid" value="{{ pair[0] }}"><input type="hidden" name="did" value="{{ pair[1] }}">
+{% for s in [2,1,0] %}<button class="btn {{ '' if r == s else 'ghost' }}" name="score" value="{{ s }}">{{ s }} – {{ labels[s] }}</button> {% endfor %}</form></div>
+{% else %}<div class="card">No disagreements yet (or the pool has not been judged by both annotators).</div>{% endfor %}
+{% endblock %}

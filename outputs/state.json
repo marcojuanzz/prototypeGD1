@@ -1,0 +1,112 @@
+{
+  "prepared": {
+    "at": "2026-11-19T23:18:11",
+    "included": 50,
+    "excluded": [],
+    "dev_queries": [
+      "D02",
+      "D08",
+      "D13",
+      "D17",
+      "D22"
+    ],
+    "final_queries": [
+      "D01",
+      "D06",
+      "D10",
+      "D11",
+      "D14",
+      "D18",
+      "D19",
+      "D23",
+      "D26",
+      "D29"
+    ],
+    "truncated": [
+      [
+        "D02",
+        388
+      ],
+      [
+        "D04",
+        443
+      ],
+      [
+        "D10",
+        407
+      ],
+      [
+        "D31",
+        433
+      ]
+    ]
+  },
+  "dev": {
+    "at": "2026-11-19T23:18:25",
+    "queries": [
+      "D02",
+      "D08",
+      "D13",
+      "D17",
+      "D22"
+    ],
+    "percentile_reference": {
+      "length": [
+        208,
+        139,
+        123,
+        104,
+        113
+      ],
+      "specificity": [
+        2.2725224997145377,
+        2.3635293189087805,
+        2.119254404308566,
+        2.118116795987932,
+        2.244929694792896
+      ]
+    },
+    "pool_pairs": 74
+  },
+  "alpha_star": 0.5,
+  "alpha_source": "provisional (development judgments not finished)",
+  "frozen": {
+    "at": "2026-11-19T23:22:13",
+    "alpha_star": 0.5,
+    "alpha_source": "provisional (development judgments not finished)",
+    "bm25": {
+      "k1": 1.2,
+      "b": 0.75,
+      "variant": "lucene"
+    },
+    "model": "sentence-transformers/all-mpnet-base-v2",
+    "max_tokens": 384,
+    "pool_depth": 10,
+    "seed": 2026,
+    "versions": {
+      "python": "3.13.3",
+      "bm25s": "0.3.16",
+      "sentence-transformers": "6.3.0",
+      "torch": "2.15.0+cpu",
+      "transformers": "5.23.0",
+      "numpy": "2.5.5",
+      "scipy": "1.18.1"
+    }
+  },
+  "final": {
+    "at": "2026-11-19T23:22:13",
+    "queries": [
+      "D01",
+      "D06",
+      "D10",
+      "D11",
+      "D14",
+      "D18",
+      "D19",
+      "D23",
+      "D26",
+      "D29"
+    ],
+    "pool_pairs": 157
+  }
+}

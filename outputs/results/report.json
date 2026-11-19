@@ -1,0 +1,265 @@
+{
+  "generated": "2026-11-20T00:10:07",
+  "alpha_star": 0.5,
+  "alpha_source": "provisional (development judgments not finished)",
+  "judgment_status": {
+    "pairs": 157,
+    "agreed": 0,
+    "resolved": 0,
+    "unresolved": 0,
+    "incomplete": 157,
+    "source": "AI pilot only (pilot, not the consensus)"
+  },
+  "queries_used": [
+    "D01",
+    "D06",
+    "D10",
+    "D11",
+    "D14",
+    "D18",
+    "D19",
+    "D23",
+    "D26",
+    "D29"
+  ],
+  "queries_without_relevant": [],
+  "summary": {
+    "BM25": {
+      "nDCG@10": 0.7416500658820949,
+      "P@5": 0.42000000000000004,
+      "Recall (pool)": 0.8333333333333334
+    },
+    "SBERT": {
+      "nDCG@10": 0.929695183290675,
+      "P@5": 0.5,
+      "Recall (pool)": 1.0
+    },
+    "Fixed-Weight Hybrid": {
+      "nDCG@10": 0.8402928400196392,
+      "P@5": 0.48,
+      "Recall (pool)": 0.9
+    },
+    "Query-Adaptive Hybrid": {
+      "nDCG@10": 0.8715987782082906,
+      "P@5": 0.5,
+      "Recall (pool)": 0.9
+    }
+  },
+  "tests": [
+    {
+      "measure": "nDCG@10",
+      "config_1": "BM25",
+      "config_2": "SBERT",
+      "mean_difference": -0.18804511740858007,
+      "p_value": 0.14764852351476485,
+      "n_queries": 10,
+      "p_holm": 0.5905940940590594,
+      "significant": false
+    },
+    {
+      "measure": "nDCG@10",
+      "config_1": "BM25",
+      "config_2": "Fixed-Weight Hybrid",
+      "mean_difference": -0.09864277413754424,
+      "p_value": 0.015319846801531985,
+      "n_queries": 10,
+      "p_holm": 0.09191908080919191,
+      "significant": false
+    },
+    {
+      "measure": "nDCG@10",
+      "config_1": "BM25",
+      "config_2": "Query-Adaptive Hybrid",
+      "mean_difference": -0.12994871232619548,
+      "p_value": 0.015319846801531985,
+      "n_queries": 10,
+      "p_holm": 0.09191908080919191,
+      "significant": false
+    },
+    {
+      "measure": "nDCG@10",
+      "config_1": "SBERT",
+      "config_2": "Fixed-Weight Hybrid",
+      "mean_difference": 0.08940234327103584,
+      "p_value": 0.6259837401625984,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    },
+    {
+      "measure": "nDCG@10",
+      "config_1": "SBERT",
+      "config_2": "Query-Adaptive Hybrid",
+      "mean_difference": 0.058096405082384596,
+      "p_value": 0.8678413215867842,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    },
+    {
+      "measure": "nDCG@10",
+      "config_1": "Fixed-Weight Hybrid",
+      "config_2": "Query-Adaptive Hybrid",
+      "mean_difference": -0.03130593818865125,
+      "p_value": 1.0,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    },
+    {
+      "measure": "P@5",
+      "config_1": "BM25",
+      "config_2": "SBERT",
+      "mean_difference": -0.08,
+      "p_value": 0.12525874741252588,
+      "n_queries": 10,
+      "p_holm": 0.7515524844751553,
+      "significant": false
+    },
+    {
+      "measure": "P@5",
+      "config_1": "BM25",
+      "config_2": "Fixed-Weight Hybrid",
+      "mean_difference": -0.06,
+      "p_value": 0.2525974740252597,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    },
+    {
+      "measure": "P@5",
+      "config_1": "BM25",
+      "config_2": "Query-Adaptive Hybrid",
+      "mean_difference": -0.08,
+      "p_value": 0.12608873911260887,
+      "n_queries": 10,
+      "p_holm": 0.7515524844751553,
+      "significant": false
+    },
+    {
+      "measure": "P@5",
+      "config_1": "SBERT",
+      "config_2": "Fixed-Weight Hybrid",
+      "mean_difference": 0.020000000000000007,
+      "p_value": 1.0,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    },
+    {
+      "measure": "P@5",
+      "config_1": "SBERT",
+      "config_2": "Query-Adaptive Hybrid",
+      "mean_difference": 5.551115123125783e-18,
+      "p_value": 1.0,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    },
+    {
+      "measure": "P@5",
+      "config_1": "Fixed-Weight Hybrid",
+      "config_2": "Query-Adaptive Hybrid",
+      "mean_difference": -0.02,
+      "p_value": 1.0,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    },
+    {
+      "measure": "Recall (pool)",
+      "config_1": "BM25",
+      "config_2": "SBERT",
+      "mean_difference": -0.16666666666666666,
+      "p_value": 0.2507974920250797,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    },
+    {
+      "measure": "Recall (pool)",
+      "config_1": "BM25",
+      "config_2": "Fixed-Weight Hybrid",
+      "mean_difference": -0.06666666666666667,
+      "p_value": 0.5001849981500185,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    },
+    {
+      "measure": "Recall (pool)",
+      "config_1": "BM25",
+      "config_2": "Query-Adaptive Hybrid",
+      "mean_difference": -0.06666666666666667,
+      "p_value": 0.5001849981500185,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    },
+    {
+      "measure": "Recall (pool)",
+      "config_1": "SBERT",
+      "config_2": "Fixed-Weight Hybrid",
+      "mean_difference": 0.1,
+      "p_value": 1.0,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    },
+    {
+      "measure": "Recall (pool)",
+      "config_1": "SBERT",
+      "config_2": "Query-Adaptive Hybrid",
+      "mean_difference": 0.1,
+      "p_value": 1.0,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    },
+    {
+      "measure": "Recall (pool)",
+      "config_1": "Fixed-Weight Hybrid",
+      "config_2": "Query-Adaptive Hybrid",
+      "mean_difference": 0.0,
+      "p_value": 1.0,
+      "n_queries": 10,
+      "p_holm": 1.0,
+      "significant": false
+    }
+  ],
+  "agreement": {
+    "dev": {
+      "pairs": 0,
+      "kappa": null,
+      "percent_agreement": null
+    },
+    "final": {
+      "pairs": 0,
+      "kappa": null,
+      "percent_agreement": null
+    }
+  },
+  "correlations": {
+    "delta_LS vs length": {
+      "rho": 0.5757575757575757,
+      "p": 0.08155281477260244
+    },
+    "delta_LS vs specificity": {
+      "rho": 0.5515151515151515,
+      "p": 0.09840117666963498
+    },
+    "delta_LS vs alpha_q": {
+      "rho": 0.4753901630533415,
+      "p": 0.16494775537985393
+    },
+    "delta_AF vs |alpha_q - a*|": {
+      "rho": -0.19826289642953604,
+      "p": 0.5829495619516928
+    }
+  },
+  "adaptive_vs_fixed": {
+    "higher": 1,
+    "lower": 1,
+    "equal": 8
+  }
+}

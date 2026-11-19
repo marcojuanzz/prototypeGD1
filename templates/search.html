@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% block body %}
+<form method="get" class="card" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+<label>Query abstract <select name="q" onchange="this.form.submit()">
+{% for d in docs %}<option value="{{ d.doc_id }}" {% if d.doc_id==q.doc_id %}selected{% endif %}>{{ d.doc_id }}{% if d.query_role %} [{{ d.query_role }}]{% endif %} – {{ d.title[:80] }}</option>{% endfor %}
+</select></label>
+<label>Top <input type="number" name="k" value="{{ k }}" min="1" max="49" style="width:64px"></label>
+<button class="btn ghost">Show</button></form>
+<div class="card"><h1>{{ q.title }}</h1><p class="muted">{{ q.doc_id }}{% if q.query_role %} · {{ q.query_role }} query{% endif %} · excluded from its own candidates</p>
+<details><summary>Query abstract</summary><p class="abstract">{{ q.abstract }}</p></details>
+{% if info %}<table style="margin-top:12px;width:auto">
+<tr><th>Query length ℓ(q)</th><th>Term specificity σ(q)</th><th>P<sub>ℓ</sub></th><th>P<sub>σ</sub></th><th>Lexical weight α<sub>q</sub></th><th>Fixed α*</th></tr>
+<tr><td class="num">{{ info.length }}</td><td class="num">{{ '%.3f'|format(info.specificity) }}</td><td class="num">{{ '%.2f'|format(info.p_length) }}</td><td class="num">{{ '%.2f'|format(info.p_specificity) }}</td><td class="num"><b>{{ '%.2f'|format(info.alpha_q) }}</b></td><td class="num">{{ alpha_star }}</td></tr></table>
+{% if alpha_source and 'provisional' in alpha_source %}<p class="note">a* is provisional: development judgments are not finished.</p>{% endif %}
+{% else %}<p class="note">Run the development phase and select a* to see the hybrid configurations.</p>{% endif %}
+</div>
+<div class="grid {{ 'g4' if columns|length == 4 else 'g2' }}">
+{% for name, ranking in columns %}<div class="card"><h2 style="margin-top:0">{{ name }}</h2><ol class="rank">
+{% for did, s in ranking %}<li><details><summary>{{ by_id[did].title }}</summary><p class="abstract">{{ by_id[did].abstract }}</p></details>
+<span class="score">{{ did }} · {{ '%.4f'|format(s) }}</span></li>{% endfor %}</ol></div>{% endfor %}
+</div>{% endblock %}

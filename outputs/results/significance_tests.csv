@@ -1,0 +1,19 @@
+measure,config_1,config_2,mean_difference,p_value,n_queries,p_holm,significant
+nDCG@10,BM25,SBERT,-0.18804511740858007,0.14764852351476485,10,0.5905940940590594,False
+nDCG@10,BM25,Fixed-Weight Hybrid,-0.09864277413754424,0.015319846801531985,10,0.09191908080919191,False
+nDCG@10,BM25,Query-Adaptive Hybrid,-0.12994871232619548,0.015319846801531985,10,0.09191908080919191,False
+nDCG@10,SBERT,Fixed-Weight Hybrid,0.08940234327103584,0.6259837401625984,10,1.0,False
+nDCG@10,SBERT,Query-Adaptive Hybrid,0.058096405082384596,0.8678413215867842,10,1.0,False
+nDCG@10,Fixed-Weight Hybrid,Query-Adaptive Hybrid,-0.03130593818865125,1.0,10,1.0,False
+P@5,BM25,SBERT,-0.08,0.12525874741252588,10,0.7515524844751553,False
+P@5,BM25,Fixed-Weight Hybrid,-0.06,0.2525974740252597,10,1.0,False
+P@5,BM25,Query-Adaptive Hybrid,-0.08,0.12608873911260887,10,0.7515524844751553,False
+P@5,SBERT,Fixed-Weight Hybrid,0.020000000000000007,1.0,10,1.0,False
+P@5,SBERT,Query-Adaptive Hybrid,5.551115123125783e-18,1.0,10,1.0,False
+P@5,Fixed-Weight Hybrid,Query-Adaptive Hybrid,-0.02,1.0,10,1.0,False
+Recall (pool),BM25,SBERT,-0.16666666666666666,0.2507974920250797,10,1.0,False
+Recall (pool),BM25,Fixed-Weight Hybrid,-0.06666666666666667,0.5001849981500185,10,1.0,False
+Recall (pool),BM25,Query-Adaptive Hybrid,-0.06666666666666667,0.5001849981500185,10,1.0,False
+Recall (pool),SBERT,Fixed-Weight Hybrid,0.1,1.0,10,1.0,False
+Recall (pool),SBERT,Query-Adaptive Hybrid,0.1,1.0,10,1.0,False
+Recall (pool),Fixed-Weight Hybrid,Query-Adaptive Hybrid,0.0,1.0,10,1.0,False
